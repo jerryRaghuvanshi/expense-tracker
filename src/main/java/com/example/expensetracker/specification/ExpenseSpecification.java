@@ -18,6 +18,16 @@ public class ExpenseSpecification {
         };
 
     }
+    public static Specification<Expense> hasKeyword(String keyword) {
+        return (root, query, cb) -> {
+            if (keyword == null || keyword.isBlank()) {
+                return cb.conjunction(); // Returns a neutral SQL condition (1=1) that won't filter out data
+            }
+
+            String searchPattern = "%" + keyword.trim().toLowerCase() + "%";
+            return cb.like(cb.lower(root.get("description")), searchPattern);
+        };
+    }
 
     public static Specification<Expense> hasCategory(
 

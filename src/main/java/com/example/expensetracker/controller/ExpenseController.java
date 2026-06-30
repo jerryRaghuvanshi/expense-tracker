@@ -56,7 +56,7 @@ public class ExpenseController {
             )
 
             Long categoryId,
-
+            @RequestParam(required = false) String keyword,
 
 
             @RequestParam(
@@ -101,6 +101,8 @@ public class ExpenseController {
                         user,
 
                         categoryId,
+                        keyword,
+
 
                         month,
 

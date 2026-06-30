@@ -13,7 +13,8 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
-
+import java.util.HashMap;
+import java.util.Map;
 @Service
 public class JwtService {
     @Value("${jwt.secret-key}")
@@ -30,9 +31,18 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
 
     }
-    public String generateToken(User user){
+    public String generateToken(User user) {
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", user.getId());
+
+        claims.put("username", user.getUsername());
+
+        claims.put("email", user.getEmail());
 
         return Jwts.builder()
+
+                .claims(claims)
 
                 .subject(user.getEmail())
 
@@ -45,12 +55,9 @@ public class JwtService {
                         )
                 )
 
-                .signWith(
-                        getSignInKey()
-                )
+                .signWith(getSignInKey())
 
                 .compact();
-
     }
     public String extractUsername(String token){
 

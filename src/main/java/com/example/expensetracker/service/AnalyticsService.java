@@ -4,6 +4,7 @@ import com.example.expensetracker.dto.analyticsDto.CategoryBreakdownResponse;
 import com.example.expensetracker.dto.analyticsDto.DashboardResponse;
 import com.example.expensetracker.entity.User;
 
+import java.math.BigDecimal;
 import java.time.Month;
 import java.util.List;
 
@@ -31,4 +32,5 @@ public interface AnalyticsService {
             Integer year
 
     );
+
 }

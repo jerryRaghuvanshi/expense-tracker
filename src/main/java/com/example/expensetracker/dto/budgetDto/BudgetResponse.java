@@ -16,6 +16,7 @@ public class BudgetResponse {
 
     String categoryName;
 
+    Long categoryId;
 
     BigDecimal budget;
 

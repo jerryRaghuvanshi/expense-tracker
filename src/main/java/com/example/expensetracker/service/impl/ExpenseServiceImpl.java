@@ -46,6 +46,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Page<ExpenseResponse> getExpenses(User user, Long categoryId,
+                                             String keyword,
                                              Month month, Integer year,
                                              Pageable pageable)
     {
@@ -81,6 +82,16 @@ public class ExpenseServiceImpl implements ExpenseService {
                                 ExpenseSpecification.hasYear(
 
                                         year
+
+                                )
+
+                        )
+                        .and(
+
+
+                                ExpenseSpecification.hasKeyword(
+
+                                        keyword
 
                                 )
 

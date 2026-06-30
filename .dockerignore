@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+
+
+# Gradle cache
+.gradle/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+README.Docker.md
+HELP.md

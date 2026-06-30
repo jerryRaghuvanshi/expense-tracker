@@ -24,7 +24,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 
     @Override
     public DashboardResponse getDashboard(User user, Month month, Integer year) {
-        BigDecimal budget = budgetRepository.getTotalBudget(user, month.getValue(), year);
+        BigDecimal budget = budgetRepository.getTotalBudget(user, month, year);
         BigDecimal spent = expenseRepository.getSpentAmount(user,month.getValue(),year);
         BigDecimal remaining = budget.subtract(spent);
         List<CategoryBreakdownResponse> breakdown = expenseRepository.getCategorySpendingBreakdown(user, month.getValue(), year);
@@ -46,4 +46,5 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     public List<CategoryBreakdownResponse> getBreakdown(User user, Month month, Integer year) {
         return expenseRepository.getCategorySpendingBreakdown(user, month.getValue(), year);
     }
+
 }

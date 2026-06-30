@@ -13,7 +13,7 @@ import java.util.List;
 public interface ExpenseService {
 
     ExpenseResponse createExpense(ExpenseRequest expenseRequest, User user);
-    Page<ExpenseResponse> getExpenses(User user, Long categoryId, Month month, Integer year, Pageable pageable
+    Page<ExpenseResponse> getExpenses(User user, Long categoryId,String keyword, Month month, Integer year, Pageable pageable
 
     );
 

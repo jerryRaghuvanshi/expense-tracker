@@ -66,7 +66,9 @@ public class BudgetServiceImpl implements BudgetService {
             );
 
         }
+
         Budget  budget = budgetMapper.toEntity(request);
+
         budget.setUser(user);
         budget.setCategory(category);
 
@@ -124,17 +126,17 @@ public class BudgetServiceImpl implements BudgetService {
                 .map(budget -> {
 
 
-                    BigDecimal spent =
+                    BigDecimal spent = expenseRepository.getSpentAmountByCategory(
 
-                            expenseRepository.getSpentAmount(
+                            user,
 
-                                    user,
+                            budget.getCategory().getId(),
 
-                                    budget.getMonth().getValue(),
+                            budget.getMonth().getValue(),
 
-                                    budget.getYear()
+                            budget.getYear()
 
-                            );
+                    );
 
 
                     BudgetResponse response =
@@ -143,11 +145,9 @@ public class BudgetServiceImpl implements BudgetService {
 
                     response.setSpent(spent);
 
-
                     response.setRemaining(
 
-                            budget.getAmount()
-                                    .subtract(spent)
+                            budget.getAmount().subtract(spent)
 
                     );
 
@@ -244,13 +244,29 @@ public class BudgetServiceImpl implements BudgetService {
 
         );
 
+        BigDecimal spent =
 
+                expenseRepository.getSpentAmountByCategory(
 
-        return budgetMapper.toResponse(
+                        user,
 
-                budget
+                        budget.getCategory().getId(),
 
+                        budget.getMonth().getValue(),
+
+                        budget.getYear()
+
+                );
+
+        BudgetResponse response = budgetMapper.toResponse(budget);
+
+        response.setSpent(spent);
+
+        response.setRemaining(
+                budget.getAmount().subtract(spent)
         );
+
+        return response;
 
 
     }
